@@ -4,7 +4,7 @@ from preprocess import preprocess
 import resources
 
 # Unpack resources
-resources.unpack()
+resources.setup()
 
 df = pd.read_csv('data/problems.csv')
 df = preprocess(df)

@@ -1,5 +1,6 @@
 from nltk.tokenize import word_tokenize
 import pandas as pd
+from tqdm import tqdm
 
 from resources import resources 
 
@@ -15,7 +16,8 @@ def preprocess(df: pd.DataFrame):
     df = df.rename(columns = { 'problem_tags' : 'problem_rating' })
 
     # Preprocess statements
-    df['problem_statement'] = df['problem_statement'].apply(preprocess_statement)
+    df['problem_statement'] = df['problem_statement'].progress_apply(
+            preprocess_statement)
 
     # Clean up
     df = df.dropna()
