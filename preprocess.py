@@ -1,19 +1,25 @@
+from nltk.tokenize import word_tokenize
 import pandas as pd
 
+from resources import resources 
+
 def preprocess(df: pd.DataFrame):
+
+    print("Preprocessing dataframe...")
 
     # Drop unused columns
     df = df.drop(columns = ['contest', 'problem_name'])
 
     # Preprocess tags
     df['problem_tags'] = df['problem_tags'].apply(preprocess_tag)
-    df = df.rename(columns = { 'problem_tags' : 'problem_ratings' })
+    df = df.rename(columns = { 'problem_tags' : 'problem_rating' })
 
     # Preprocess statements
-    # TODO...
+    df['problem_statement'] = df['problem_statement'].apply(preprocess_statement)
 
     # Clean up
     df = df.dropna()
+
     return df
 
 def preprocess_tag(tag):
@@ -47,5 +53,19 @@ def preprocess_tag(tag):
     # tag is digit...
     return int(rating)
 
-def preprocess_statement(statament):
-    return statement
+def preprocess_statement(statement):
+
+    if (pd.isna(statement)):
+        return statement
+
+    # Lowercase
+    statement = statement.lower()
+
+    # Tokenize
+    tokens = word_tokenize(statement)
+
+    # No punctuation and stopwords
+    tokens = [word for word in tokens if word not in resources.punctuations]
+    tokens = [word for word in tokens if word not in resources.stopwords]
+
+    return tokens

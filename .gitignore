@@ -15,7 +15,7 @@ __pycache__
 data/*
 
 # In progress changes, that I don't want to commit yet
-# in-progress.py
+in-progress.py
 
 # Keep essential folders
 !.gitkeep
