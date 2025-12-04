@@ -8,8 +8,14 @@
 # Python environment
 env/
 
+# Python cache files
+__pycache__
+
 # Dataset folder
 data/*
+
+# In progress changes, that I don't want to commit yet
+# in-progress.py
 
 # Keep essential folders
 !.gitkeep
