@@ -1,0 +1,15 @@
+# Vim files
+*.swp
+*.vim/
+
+# MacOS files
+.DS_Store
+
+# Python environment
+env/
+
+# Dataset folder
+data/*
+
+# Keep essential folders
+!.gitkeep
