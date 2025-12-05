@@ -7,13 +7,9 @@ import joblib
 from preprocess import preprocess
 from resources import Resources
 
-# No using lambda function, cause joblib can't handle those
-def Identity(x):
-    return x
-
 class Encoder:
 
-    this = CountVectorizer(analyzer = Identity)
+    this = CountVectorizer(analyzer = lambda x: x)
     
     @staticmethod
     def load(path: str = 'saves/encoder.joblib'):

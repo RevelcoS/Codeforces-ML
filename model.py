@@ -8,8 +8,9 @@ import joblib
 
 from preprocess import preprocess, preprocess_statement
 
-from encoder import Encoder
 from resources import Resources
+from encoder import Encoder
+from scaler import Scaler
 
 class Model:
 
@@ -41,19 +42,16 @@ class Model:
         Model.this.fit(X_train, y_train)
 
     @staticmethod
-    def predict(X_test):
-        return Model.this.predict(X_test)
+    def predict(X):
+        return Model.this.predict(X)
 
     @staticmethod
     def predict_single(X):
 
         X = preprocess_statement(X)
         X = pd.Series([X])
-        # print(X)
-
         X = Encoder.transform(X)
-        # print(X)
-        return Model.this.predict(X)
+        return Model.predict(X)
 
     @staticmethod
     def score(y_test, y_pred):
@@ -64,6 +62,7 @@ if __name__ == '__main__':
     # Setup
     Resources.load()
     Encoder.load()
+    Scaler.load()
 
     # Preprocess data
     print("Preprocessing dataframe...")
@@ -77,6 +76,10 @@ if __name__ == '__main__':
     # Encode data
     X_train = Encoder.transform(X_train)
     X_test = Encoder.transform(X_test)
+
+    # Scale data
+    X_train = Scaler.transform(X_train)
+    X_test = Scaler.transform(X_test)
 
     # Train data
     print("Training model...")

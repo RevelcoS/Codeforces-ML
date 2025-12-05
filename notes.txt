@@ -1,0 +1,3 @@
+Model scores:
+1) 526.47 (Base model)
+2) 531.54 (With scaler)

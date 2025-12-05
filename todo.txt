@@ -5,5 +5,9 @@
 * Do a mini-flask app
 * Try SGDRegressor instead with partial fit
   (incremental learning).
-+ Add saves directory
+* Add samples directory
+* Add Saver class
 * Download dataset from keggle
+
+* Add requirements.txt
+* Add README.txt
