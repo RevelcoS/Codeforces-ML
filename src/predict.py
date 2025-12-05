@@ -21,5 +21,5 @@ y_pred = Model.predict_single(X)
 
 print(f"Prediction: {y_pred}")
 
-score = Model.score(y_test, y_pred)
-print(f"Score: {score:.2f}")
+error = Model.error(y_test, y_pred)
+print(f"Error: {error:.2f}")

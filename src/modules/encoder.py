@@ -7,7 +7,7 @@ import joblib
 class Encoder:
 
     this = CountVectorizer(analyzer = lambda x: x)
-    
+
     @staticmethod
     def load(path: str = 'saves/encoder.joblib'):
         Encoder.this.vocabulary_ = joblib.load(path)

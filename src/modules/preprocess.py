@@ -60,14 +60,12 @@ def preprocess_statement(statement):
     if (pd.isna(statement)):
         return statement
 
-    # Lowercase
     statement = statement.lower()
-
-    # Tokenize
     tokens = word_tokenize(statement)
 
-    # No punctuation and stopwords
     tokens = [word for word in tokens if word not in Resources.punctuations]
     tokens = [word for word in tokens if word not in Resources.stopwords]
+    tokens = [Resources.stemmer.stem(word) for word in tokens]
+    tokens = [Resources.lemmatizer.lemmatize(word) for word in tokens]
 
     return tokens

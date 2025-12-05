@@ -1,7 +1,7 @@
 import pandas as pd
 
 from sklearn.model_selection import train_test_split as _train_test_split
-from sklearn.svm import SVR
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error as MAE 
 
 import joblib
@@ -13,7 +13,7 @@ from modules.scaler import Scaler
 
 class Model:
 
-    this = SVR(verbose=True) 
+    this = RandomForestRegressor(verbose=True, n_jobs=8)
 
     @staticmethod
     def load(path = 'saves/model.joblib'):
@@ -51,7 +51,7 @@ class Model:
         return Model.predict(X)
 
     @staticmethod
-    def score(y_test, y_pred):
+    def error(y_test, y_pred):
         return MAE(y_test, y_pred)
 
 
@@ -72,8 +72,8 @@ def train(df: pd.DataFrame):
     print("\nTesting model...")
     y_pred = Model.predict(X_test)
 
-    score = Model.score(y_test, y_pred)
-    print(f"Score: {score:.2f}")
+    error = Model.error(y_test, y_pred)
+    print(f"Error: {error:.2f}")
 
     print("Saving model...")
     Model.save()

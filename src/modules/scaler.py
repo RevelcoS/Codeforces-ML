@@ -4,7 +4,8 @@ import joblib
 
 class Scaler:
 
-    this = StandardScaler(with_mean = False)
+    # Note: no scaling is done
+    this = StandardScaler(with_mean = False, with_std = False)
 
     @staticmethod
     def save(path = 'saves/scaler.joblib'):

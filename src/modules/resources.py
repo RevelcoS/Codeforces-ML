@@ -1,5 +1,6 @@
 import nltk
 from nltk.corpus import stopwords as _stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
 
 from tqdm import tqdm
 import string
@@ -8,6 +9,8 @@ class Resources:
 
     punctuations = None
     stopwords = None
+    stemmer = None
+    lemmatizer = None
 
     @staticmethod
     def download():
@@ -17,7 +20,8 @@ class Resources:
         # Download NLTK resources
         nltk.download('punkt')
         nltk.download('stopwords')
-        nltk.download('punkt_tab') 
+        nltk.download('punkt_tab')
+        nltk.download('wordnet')
 
     @staticmethod
     def load():
@@ -25,6 +29,8 @@ class Resources:
         # Unpack NLTK resources
         Resources.punctuations = set(string.punctuation)
         Resources.stopwords = set(_stopwords.words('english'))
+        Resources.stemmer = PorterStemmer()
+        Resources.lemmatizer = WordNetLemmatizer()
 
         # Use tqdm pandas extension for progress_apply function
         tqdm.pandas()
