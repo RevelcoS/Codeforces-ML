@@ -1,12 +1,12 @@
 from nltk.tokenize import word_tokenize
+
+import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
 from resources import resources 
 
 def preprocess(df: pd.DataFrame):
-
-    print("Preprocessing dataframe...")
 
     # Drop unused columns
     df = df.drop(columns = ['contest', 'problem_name'])
@@ -21,27 +21,28 @@ def preprocess(df: pd.DataFrame):
 
     # Clean up
     df = df.dropna()
+    df['problem_rating'] = df['problem_rating'].astype(np.int64)
 
     return df
 
 def preprocess_tag(tag):
     if (pd.isna(tag)):
-        return tag
+        return np.nan
 
     # tag is not nan...
     if (type(tag) == int):
         return tag
 
     elif (type(tag) == float):
-        return int(tag)
+        return np.int64(tag)
  
     if (type(tag) != str):
-        return pd.NA
+        return np.nan
     
     # type(tag) == str...
     rating = tag.split(',')[-1]
     if (len(rating) == 0):
-        return pd.NA
+        return np.nan
 
     # len(tag) > 0...
     if (rating[0] == '*'):
@@ -50,10 +51,10 @@ def preprocess_tag(tag):
     # tag does not start with * ...
 
     if (not rating.isdigit()):
-        return pd.NA
+        return np.nan
 
     # tag is digit...
-    return int(rating)
+    return np.int64(rating)
 
 def preprocess_statement(statement):
 
