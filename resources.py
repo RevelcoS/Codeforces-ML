@@ -20,7 +20,7 @@ class Resources:
         nltk.download('punkt_tab') 
 
     @staticmethod
-    def setup():
+    def load():
 
         # Unpack NLTK resources
         Resources.punctuations = set(string.punctuation)

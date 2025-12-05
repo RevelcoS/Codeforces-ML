@@ -1,37 +1,26 @@
 import pandas as pd
 
-from preprocess import preprocess
+from preprocess import preprocess_statement
 
-import resources
-import encoder
-import model
+from resources import Resources
+from encoder import Encoder
+from model import Model
 
-# Unpack resources
-resources.setup()
+# Get entry
+file = open("test.txt", 'r')
+X = file.read()
+file.close()
 
-# Preprocess data
-print("Preprocessing dataframe...")
+# Load encoder and model
+Resources.load()
+Encoder.load()
+Model.load()
 
-df = pd.read_csv('data/problems.csv')
-df = preprocess(df)
+# Predict
+y_test = pd.Series([2800])
+y_pred = Model.predict_single(X)
 
-# Fit data for encoder
-encoder.fit(df)
+print(f"Prediction: {y_pred}")
 
-# Train test split
-X_train, X_test, y_train, y_test = model.train_test_split(df)
-
-# Encode data
-X_train = encoder.transform(X_train)
-X_test = encoder.transform(X_test)
-
-# Train data
-print("Training model...")
-model.train(X_train, y_train)
-
-# Test data
-print("Testing model...")
-y_pred = model.predict(X_test)
-
-score = model.score(y_test, y_pred)
+score = Model.score(y_test, y_pred)
 print(f"Score: {score:.2f}")

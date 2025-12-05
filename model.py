@@ -48,7 +48,11 @@ class Model:
     def predict_single(X):
 
         X = preprocess_statement(X)
+        X = pd.Series([X])
+        # print(X)
+
         X = Encoder.transform(X)
+        # print(X)
         return Model.this.predict(X)
 
     @staticmethod
@@ -58,7 +62,7 @@ class Model:
 if __name__ == '__main__':
 
     # Setup
-    Resources.setup()
+    Resources.load()
     Encoder.load()
 
     # Preprocess data

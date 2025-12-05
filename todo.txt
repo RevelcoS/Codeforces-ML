@@ -1,9 +1,9 @@
 * Normalize data
 * Round predictions to hundreds
 * Predict custom text
-* Save model
++ Save and load model
 * Do a mini-flask app
 * Try SGDRegressor instead with partial fit
   (incremental learning).
-* Add samples directory
++ Add saves directory
 * Download dataset from keggle

@@ -35,7 +35,7 @@ class Encoder:
 if __name__ == '__main__':
 
     # Setup
-    Resources.setup()
+    Resources.load()
 
     # Preprocess data
     print("Preprocessing dataframe...")
