@@ -6,40 +6,60 @@ from sklearn.metrics import mean_absolute_error as MAE
 
 import joblib
 
-from preprocess import preprocess
+from preprocess import preprocess, preprocess_statement
 
-import encoder
-import resources
+from encoder import Encoder
+from resources import Resources
 
-model = SVR(verbose=True)
+class Model:
 
-def train_test_split(df: pd.DataFrame):
+    this = SVR(verbose=True) 
 
-    # Get features and labels
-    X = df['problem_statement']
-    y = df['problem_rating']
+    @staticmethod
+    def load(path = 'saves/model.joblib'):
+        Model.this = joblib.load(path) 
 
-    # Train test split
-    X_train, X_test, y_train, y_test = _train_test_split(
-            X, y, test_size=0.25, random_state=42)
+    @staticmethod
+    def save(path = 'saves/model.joblib'):
+        Model.this = joblib.dump(Model.this, path)
 
-    return X_train, X_test, y_train, y_test
+    @staticmethod
+    def train_test_split(df: pd.DataFrame):
 
-def train(X_train, y_train):
-    model.fit(X_train, y_train)
+        # Get features and labels
+        X = df['problem_statement']
+        y = df['problem_rating']
 
-def predict(X_test):
-    y_pred = model.predict(X_test)
-    return y_pred
+        # Train test split
+        X_train, X_test, y_train, y_test = _train_test_split(
+                X, y, test_size=0.25, random_state=42)
 
-def score(y_test, y_pred):
-    return MAE(y_test, y_pred)
+        return X_train, X_test, y_train, y_test
 
+    @staticmethod
+    def train(X_train, y_train):
+        Model.this.fit(X_train, y_train)
+
+    @staticmethod
+    def predict(X_test):
+        return Model.this.predict(X_test)
+
+    @staticmethod
+    def predict_single(X):
+
+        X = preprocess_statement(X)
+        X = Encoder.transform(X)
+        return Model.this.predict(X)
+
+    @staticmethod
+    def score(y_test, y_pred):
+        return MAE(y_test, y_pred)
 
 if __name__ == '__main__':
 
-    # Unpack resources
-    resources.setup()
+    # Setup
+    Resources.setup()
+    Encoder.load()
 
     # Preprocess data
     print("Preprocessing dataframe...")
@@ -47,30 +67,27 @@ if __name__ == '__main__':
     df = pd.read_csv('data/problems.csv')
     df = preprocess(df)
 
-    # Fit data for encoder
-    encoder.fit(df)
-
     # Train test split
-    X_train, X_test, y_train, y_test = train_test_split(df)
+    X_train, X_test, y_train, y_test = Model.train_test_split(df)
 
     # Encode data
-    X_train = encoder.transform(X_train)
-    X_test = encoder.transform(X_test)
+    X_train = Encoder.transform(X_train)
+    X_test = Encoder.transform(X_test)
 
     # Train data
     print("Training model...")
-    train(X_train, y_train)
+    Model.train(X_train, y_train)
 
     # Test data
     print("Testing model...")
-    y_pred = predict(X_test)
+    y_pred = Model.predict(X_test)
 
-    score = score(y_test, y_pred)
+    score = Model.score(y_test, y_pred)
     print(f"Score: {score:.2f}")
 
     # Save model
     print("Saving model...")
-    joblib.dump(model, 'saves/model.joblib')
+    Model.save()
 
     # Finish
     print("Done!")

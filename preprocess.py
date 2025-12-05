@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from resources import resources 
+from resources import Resources 
 
 def preprocess(df: pd.DataFrame):
 
@@ -67,7 +67,7 @@ def preprocess_statement(statement):
     tokens = word_tokenize(statement)
 
     # No punctuation and stopwords
-    tokens = [word for word in tokens if word not in resources.punctuations]
-    tokens = [word for word in tokens if word not in resources.stopwords]
+    tokens = [word for word in tokens if word not in Resources.punctuations]
+    tokens = [word for word in tokens if word not in Resources.stopwords]
 
     return tokens

@@ -9,26 +9,26 @@ class Resources:
     punctuations = None
     stopwords = None
 
-resources = Resources()
+    @staticmethod
+    def download():
 
-def download():
+        # TODO: add download dataset from keggle
 
-    # TODO: add download dataset from keggle
+        # Download NLTK resources
+        nltk.download('punkt')
+        nltk.download('stopwords')
+        nltk.download('punkt_tab') 
 
-    # Download NLTK resources
-    nltk.download('punkt')
-    nltk.download('stopwords')
-    nltk.download('punkt_tab') 
+    @staticmethod
+    def setup():
 
-def setup():
+        # Unpack NLTK resources
+        Resources.punctuations = set(string.punctuation)
+        Resources.stopwords = set(_stopwords.words('english'))
 
-    # Unpack NLTK resources
-    global resources 
-    resources.punctuations = set(string.punctuation)
-    resources.stopwords = set(_stopwords.words('english'))
+        # Use tqdm pandas extension for progress_apply function
+        tqdm.pandas()
 
-    # Use tqdm pandas extension for progress_apply function
-    tqdm.pandas()
 
 if __name__ == '__main__':
-    download()
+    Resources.download()
