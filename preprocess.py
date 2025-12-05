@@ -21,7 +21,6 @@ def preprocess(df: pd.DataFrame):
 
     # Clean up
     df = df.dropna()
-    df['problem_rating'] = df['problem_rating'].astype(np.int64)
 
     return df
 

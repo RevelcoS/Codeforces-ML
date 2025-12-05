@@ -14,8 +14,8 @@ __pycache__
 # Dataset folder
 data/*
 
-# In progress changes, that I don't want to commit yet
-in-progress.py
+# Model checkpoints
+saves/*
 
 # Keep essential folders
 !.gitkeep
