@@ -1,10 +1,9 @@
 import pandas as pd
 
-from preprocess import preprocess_statement
-
-from resources import Resources
-from encoder import Encoder
-from model import Model
+from modules.preprocess import preprocess_statement
+from modules.resources import Resources
+from modules.encoder import Encoder
+from modules.model import Model
 
 # Get entry
 file = open("test.txt", 'r')

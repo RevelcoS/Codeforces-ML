@@ -6,11 +6,10 @@ from sklearn.metrics import mean_absolute_error as MAE
 
 import joblib
 
-from preprocess import preprocess, preprocess_statement
-
-from resources import Resources
-from encoder import Encoder
-from scaler import Scaler
+from modules.preprocess import preprocess, preprocess_statement
+from modules.resources import Resources
+from modules.encoder import Encoder
+from modules.scaler import Scaler
 
 class Model:
 
@@ -27,11 +26,9 @@ class Model:
     @staticmethod
     def train_test_split(df: pd.DataFrame):
 
-        # Get features and labels
         X = df['problem_statement']
         y = df['problem_rating']
 
-        # Train test split
         X_train, X_test, y_train, y_test = _train_test_split(
                 X, y, test_size=0.25, random_state=42)
 
@@ -57,44 +54,26 @@ class Model:
     def score(y_test, y_pred):
         return MAE(y_test, y_pred)
 
-if __name__ == '__main__':
 
-    # Setup
-    Resources.load()
-    Encoder.load()
-    Scaler.load()
+def train(df: pd.DataFrame):
+    ''' Assuming everyting else is already set up, and df is preprocessed '''
 
-    # Preprocess data
-    print("Preprocessing dataframe...")
-
-    df = pd.read_csv('data/problems.csv')
-    df = preprocess(df)
-
-    # Train test split
     X_train, X_test, y_train, y_test = Model.train_test_split(df)
 
-    # Encode data
     X_train = Encoder.transform(X_train)
     X_test = Encoder.transform(X_test)
 
-    # Scale data
     X_train = Scaler.transform(X_train)
     X_test = Scaler.transform(X_test)
 
-    # Train data
     print("Training model...")
     Model.train(X_train, y_train)
 
-    # Test data
-    print("Testing model...")
+    print("\nTesting model...")
     y_pred = Model.predict(X_test)
 
     score = Model.score(y_test, y_pred)
     print(f"Score: {score:.2f}")
 
-    # Save model
     print("Saving model...")
     Model.save()
-
-    # Finish
-    print("Done!")

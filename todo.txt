@@ -1,4 +1,7 @@
-* Normalize data
++ Normalize data
+* Y-scaler
+* Try TF-IDF
+* Translate to Russian or remove it
 * Round predictions to hundreds
 * Predict custom text
 + Save and load model

@@ -28,7 +28,3 @@ class Resources:
 
         # Use tqdm pandas extension for progress_apply function
         tqdm.pandas()
-
-
-if __name__ == '__main__':
-    Resources.download()

@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from resources import Resources 
+from modules.resources import Resources 
 
 def preprocess(df: pd.DataFrame):
 

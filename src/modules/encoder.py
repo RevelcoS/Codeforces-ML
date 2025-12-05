@@ -4,9 +4,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 import joblib
 
-from preprocess import preprocess
-from resources import Resources
-
 class Encoder:
 
     this = CountVectorizer(analyzer = lambda x: x)
@@ -26,23 +23,3 @@ class Encoder:
     @staticmethod
     def transform(data: pd.Series):
         return Encoder.this.transform(data)
-
-
-if __name__ == '__main__':
-
-    # Setup
-    Resources.load()
-
-    # Preprocess data
-    print("Preprocessing dataframe...")
-    df = pd.read_csv('data/problems.csv')
-    df = preprocess(df) 
-
-    # Fit data for encoder
-    Encoder.fit(df)
-
-    # Save encoder
-    print("Saving encoder...")
-    Encoder.save()
-
-    print("Done!")
