@@ -15,6 +15,8 @@ Resources.load()
 Encoder.load()
 Model.load()
 
+Model.verbose(False)
+
 # Predict
 y_test = pd.Series([2800])
 y_pred = Model.predict_single(X)

@@ -13,7 +13,7 @@ from modules.scaler import Scaler
 
 class Model:
 
-    this = RandomForestRegressor(verbose=True, n_jobs=8)
+    this = RandomForestRegressor(n_jobs=8, random_state=42)
 
     @staticmethod
     def load(path = 'saves/model.joblib'):
@@ -54,9 +54,15 @@ class Model:
     def error(y_test, y_pred):
         return MAE(y_test, y_pred)
 
+    @staticmethod
+    def verbose(level):
+        Model.this.set_params(verbose=level)
+
 
 def train(df: pd.DataFrame):
     ''' Assuming everyting else is already set up, and df is preprocessed '''
+
+    Model.verbose(level=2)
 
     X_train, X_test, y_train, y_test = Model.train_test_split(df)
 
