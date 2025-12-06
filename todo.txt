@@ -9,7 +9,7 @@
 * Download statement with codeforces API
 - Try SGDRegressor instead with partial fit
   (incremental learning).
-* Add samples directory
++ Add samples directory
 * Add Saver class
 * Download dataset from keggle
 

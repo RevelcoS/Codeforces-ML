@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codeforces problem rating predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Codeforces problem rating predictor</h1>
+        <p>Type the problem statement on the text field below and click the "Submit"
+           button to make a rating prediction.</p>
+
+        <div class="textarea-container"> 
+
+            <form method="POST" action="/">
+
+                <textarea name="statement" placeholder="Enter the problem statement..." required>{{ statement }}</textarea>
+
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+
+            {% if result %}
+                <div class="result">{{ result }}</div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <script> // Check if message is present on page load
+    window.onload = function() {
+        const result = document.querySelector('.result');
+        const textarea = document.querySelector('textarea');
+
+        if (result) {
+            textarea.classList.add('blurry');
+        }
+
+        textarea.addEventListener('focus', function() {
+            if (result) {
+                result.style.display = 'none';
+                textarea.classList.remove('blurry');
+            }
+        });
+
+    }
+    </script>
+
+</body>
+</html>

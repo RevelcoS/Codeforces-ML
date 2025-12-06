@@ -83,3 +83,13 @@ def train(df: pd.DataFrame):
 
     print("Saving model...")
     Model.save()
+
+
+def prediction_setup():
+
+    Resources.load()
+    Encoder.load()
+    Model.load()
+
+    Model.verbose(False)
+

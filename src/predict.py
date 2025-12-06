@@ -2,20 +2,7 @@ import os
 
 import pandas as pd
 
-from modules.preprocess import preprocess_statement
-from modules.resources import Resources
-from modules.encoder import Encoder
-from modules.model import Model
-
-def setup():
-
-    print("Loading resources...")
-    Resources.load()
-    Encoder.load()
-    Model.load()
-
-    Model.verbose(False)
-
+from modules.model import Model, prediction_setup
 
 def predict_all(directory: str):
 
@@ -47,5 +34,7 @@ def predict_single(filepath: str, filename: str):
 
 if __name__ == '__main__':
 
-    setup()
+    print("Loading resources...")
+    prediction_setup()
+
     predict_all('samples/')

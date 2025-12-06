@@ -15,7 +15,9 @@ class Resources:
     @staticmethod
     def download():
 
-        # TODO: add download dataset from keggle
+        # TODO: Add download dataset from keggle
+        # Note: Should NOT do it here.
+        #       Better do database and just add problems from keggle in it.
 
         # Download NLTK resources
         nltk.download('punkt')
