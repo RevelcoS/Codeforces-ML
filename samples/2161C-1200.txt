@@ -1,0 +1,9 @@
+You are a customer in a store and want to buy n items. Each item i has a price a_i
+ such that 1 <= ai <= X, where X is a loyalty factor.
+
+Your loyalty level in the store is defined as Sx, where S
+ is the total cost of items purchased so far. Initially, S=0.
+
+If you buy an item with price p and your loyalty level increases as a result of this purchase, you earn p bonus points.
+
+Your task is to find the maximum number of bonus points you can earn by choosing an optimal order of purchase for the items.

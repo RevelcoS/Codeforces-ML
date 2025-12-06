@@ -1,0 +1,12 @@
+This is the hard version of the problem. The only difference between the easy and hard versions is that the hard version asks you to construct an example of a satisfactory tree.
+
+As an Earth mage, Rae has mastered the spell of growing trees! But Manaria brags that she can grow a more impressive species of trees. Rae remembers that the most rare type of tree can be grown using a formula represented by a certain permutation — please help her construct it!
+
+You are given a permutation p of length n.
+
+Determine if there exists an undirected tree with n vertices labeled 1,2,...,n , satisfying the following condition:
+
+Let u and v (1 <= u < v <= n) be any two vertices connected by an edge. Then u
+appears before v in p.
+
+Additionally, if there exists such a tree, output any of them.

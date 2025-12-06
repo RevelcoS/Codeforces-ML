@@ -8,18 +8,14 @@ from modules.resources import Resources
 
 def preprocess(df: pd.DataFrame):
 
-    # Drop unused columns
     df = df.drop(columns = ['contest', 'problem_name'])
 
-    # Preprocess tags
     df['problem_tags'] = df['problem_tags'].apply(preprocess_tag)
     df = df.rename(columns = { 'problem_tags' : 'problem_rating' })
 
-    # Preprocess statements
     df['problem_statement'] = df['problem_statement'].progress_apply(
             preprocess_statement)
 
-    # Clean up
     df = df.dropna()
 
     return df

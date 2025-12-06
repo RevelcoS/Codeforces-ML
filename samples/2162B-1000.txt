@@ -1,0 +1,15 @@
+You are given a binary string s of length n.
+
+Your task is to find any subsequence p of s such that:
+
+The subsequence p
+ is non-decreasing. That is, each character in p
+ is not greater than the next one.
+Let x
+ denote the string obtained by removing all characters of p
+ from s, while preserving the order of the remaining characters. Then x
+ must be a palindrome.
+
+You only need to output any valid subsequence p that satisfies both conditions. If no such subsequence exists, output −1.
+
+Note that an empty string is both non-decreasing and a palindrome.

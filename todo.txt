@@ -6,6 +6,7 @@
 + Predict custom text
 + Save and load model
 * Do a mini-flask app
+* Download statement with codeforces API
 - Try SGDRegressor instead with partial fit
   (incremental learning).
 * Add samples directory
