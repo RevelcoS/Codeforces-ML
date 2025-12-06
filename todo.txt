@@ -1,12 +1,12 @@
 + Normalize data
 * Y-scaler
-* Try TF-IDF
++ Try TF-IDF
 * Translate to Russian or remove it
 * Round predictions to hundreds
-* Predict custom text
++ Predict custom text
 + Save and load model
 * Do a mini-flask app
-* Try SGDRegressor instead with partial fit
+- Try SGDRegressor instead with partial fit
   (incremental learning).
 * Add samples directory
 * Add Saver class

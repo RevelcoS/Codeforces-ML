@@ -62,7 +62,7 @@ class Model:
 def train(df: pd.DataFrame):
     ''' Assuming everyting else is already set up, and df is preprocessed '''
 
-    Model.verbose(level=2)
+    Model.verbose(level=True)
 
     X_train, X_test, y_train, y_test = Model.train_test_split(df)
 
