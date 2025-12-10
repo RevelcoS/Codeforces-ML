@@ -20,6 +20,9 @@ def preprocess(df: pd.DataFrame):
 
     return df
 
+def normalize_tag(tag):
+    return (tag - 800) / 4000
+
 def preprocess_tag(tag):
     if (pd.isna(tag)):
         return np.nan
@@ -29,7 +32,7 @@ def preprocess_tag(tag):
         return tag
 
     elif (type(tag) == float):
-        return np.int64(tag)
+        return np.float32(tag)
  
     if (type(tag) != str):
         return np.nan
@@ -49,7 +52,7 @@ def preprocess_tag(tag):
         return np.nan
 
     # tag is digit...
-    return np.int64(rating)
+    return np.float32(rating)
 
 def preprocess_statement(statement):
 
