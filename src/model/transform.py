@@ -32,6 +32,9 @@ class TransformText:
 
         return sentence_embedding
 
+    def __call__(self, text: str):
+        return self.transform(text)
+
 
 class TransformRating:
 
@@ -43,3 +46,6 @@ class TransformRating:
 
     def inverse_transform(self, rating):
         return self.offset + rating * self.scale
+
+    def __call__(self, rating):
+        return self.transform(rating)
