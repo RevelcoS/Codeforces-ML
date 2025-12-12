@@ -32,13 +32,13 @@ class Model:
         self.optimizer = torch.optim.Adam(self.model.parameters(),
                                           lr=1e-3)
 
+        self.epochs = 20
+
     def train(self, train_dataloader, test_dataloader):
 
-        epochs = 20
+        for epoch in range(self.epochs):
 
-        for epoch in range(epochs):
-
-            print(f"Epoch = {epoch + 1}/{epochs}")
+            print(f"Epoch = {epoch + 1}/{self.epochs}")
             self.model.train()
 
             progress = tqdm(train_dataloader, file=sys.stdout)

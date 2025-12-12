@@ -20,15 +20,17 @@ def get_dataset(df: pd.DataFrame, context: dict):
 
     tqdm.pandas()
 
-    statements = df[context['columns']['statement']].progress_apply(
+    statement_name = context['columns']['statement']
+    rating_name = context['columns']['rating']
+
+    df = df.dropna(subset=[statement_name])
+    df = df.dropna(subset=[rating_name])
+
+    statements = df[statement_name].progress_apply(
             lambda text: context['transform']['statement'].transform(text))
 
-    ratings = df[context['columns']['rating']].progress_apply(
-            lambda rating: context['transform']['rating'].transform(rating))
-
-    indices = ratings.notna()
-    statements = statements[indices]
-    ratings = ratings[indices]
+    ratings = df[rating_name].progress_apply(
+            lambda rating: context['transform']['rating'].transform(rating)) 
 
     statements = torch.stack(statements.values.tolist())
     ratings = torch.tensor(ratings.values, dtype=torch.float32)

@@ -1,17 +1,26 @@
 + Normalize data
-* Y-scaler
++ Y-scaler
 + Try TF-IDF
-* Translate to Russian or remove it
-* Round predictions to hundreds
+- Translate to Russian or remove it
 + Predict custom text
 + Save and load model
-* Do a mini-flask app
-* Download statement with codeforces API
++ Do a mini-flask app
 - Try SGDRegressor instead with partial fit
   (incremental learning).
 + Add samples directory
+- Download dataset from keggle
++ Download dataset from Hugging Face
+
+* Incremental learning
+* Optimize BERT transform
 * Add Saver class
-* Download dataset from keggle
+
+* Round predictions to hundreds
+* Colorize predictions
 
 * Add requirements.txt
 * Add README.txt
+
+* Download statement with codeforces API
+
+* Docker-compose
