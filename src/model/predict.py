@@ -3,8 +3,8 @@ import os
 import torch
 import pandas as pd
 
-from .transform import TransformText, TransformRating
-from .model import Model
+from model.transform import TransformText, TransformRating
+from model.model import Model
 
 class Context:
 
@@ -60,7 +60,5 @@ def prediction_setup():
     Context.model.load('saves/model.pth')
 
 
-if __name__ == '__main__':
-
-    prediction_setup()
-    predict_all('samples/')
+prediction_setup()
+predict_all('samples/')
