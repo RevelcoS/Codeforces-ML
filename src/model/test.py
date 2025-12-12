@@ -12,7 +12,16 @@ class Context:
     rating_transform = None
     model = None
 
-def predict_all(directory: str):
+def test_setup():
+
+    Context.text_transform = TransformText()
+    Context.rating_transform = TransformRating()
+
+    Context.model = Model()
+    Context.model.load('saves/model.pth')
+
+
+def test(directory: str):
 
     for dirpath, dirnames, filenames in os.walk(directory):
         for filename in filenames:
@@ -50,15 +59,3 @@ def predict_rating(text: str):
     predicted_rating = Context.rating_transform.inverse_transform(pred[0][0])
 
     return pred, predicted_rating
-
-def prediction_setup():
-
-    Context.text_transform = TransformText()
-    Context.rating_transform = TransformRating()
-
-    Context.model = Model()
-    Context.model.load('saves/model.pth')
-
-
-prediction_setup()
-predict_all('samples/')
