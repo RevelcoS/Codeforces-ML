@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from model.predict import prediction_setup, predict_rating
+from model.test import test_setup, predict_rating
 
 app = Flask(__name__)
 
@@ -20,6 +20,6 @@ def index():
 if __name__ == '__main__':
 
     print('Setting up context...')
-    prediction_setup()
+    test_setup()
 
     app.run(debug=False)    

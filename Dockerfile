@@ -6,10 +6,6 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 COPY src/ /app/src/
-COPY data/ /app/data/
-COPY test.txt .
+COPY saves/ /app/saves/
 
-RUN mkdir /app/saves/
-
-RUN [ "python3", "./src/train.py" ]
-CMD [ "python3", "./src/predict.py" ]
+CMD [ "python3", "./src/app.py" ]
