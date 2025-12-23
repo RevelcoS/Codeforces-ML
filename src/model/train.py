@@ -26,10 +26,15 @@ def train(dataset_context: dict, model_context: dict):
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False)
 
+    print('Loading model...')
     model = Model()
     model.epochs = model_context['epochs']
+
+    if model_context['incremental']:
+        model.load(model_context['from_path'])
+
     print(model)
 
     model.train(train_dataloader, test_dataloader)
-    model.save("saves/model.pth")
+    model.save(model_context['to_path'])
     print("Model successfully saved.")

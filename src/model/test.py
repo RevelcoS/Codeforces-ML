@@ -12,14 +12,13 @@ class Context:
     rating_transform = None
     model = None
 
-def test_setup():
+def test_setup(directory: str = 'saves/model.pth'):
 
     Context.text_transform = TransformText()
     Context.rating_transform = TransformRating()
 
     Context.model = Model()
-    Context.model.load('saves/model.pth')
-
+    Context.model.load(directory)
 
 def test(directory: str):
 
